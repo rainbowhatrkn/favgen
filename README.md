@@ -4,6 +4,12 @@ Welcome to **Favgen by TRHACKNON** – a fun and dynamic favicon generator scrip
 
 ![Banner](https://via.placeholder.com/800x200.png?text=Favgen+by+TRHACKNON)
 
+<details>
+<summary><strong>Screenshot</strong></summary>
+<img src="https://a.top4top.io/p_31390j8fa0.jpg" alt="Stylized Image" width="600" style="border: 2px solid #fff000; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);" />
+</details>
+
+
 ## Features
 - Generate Favicons of various sizes
 - Create Apple Touch Icons
