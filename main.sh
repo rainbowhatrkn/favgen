@@ -1,23 +1,20 @@
 #!/bin/bash
 
-# Couleurs pour l'interface
 CYAN='\033[0;36m'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 COLORRESET='\033[0m'
 
-# Afficher une bannière fun
-toilet -f mono12 -F border --gay "favgen by TRHACKNON" | lolcat
-cowsay "Welcome to the Favicon Generator!" | lolcat
+cowsay --rainbow --aurora --super -f daemon "favgen by TRHACKNON"
 
-# Vérifier si ImageMagick est installé
+toilet -f mono12 -F border --gay "favgen by TRHACKNON" | lolcat
+
 if ! command -v convert >/dev/null 2>&1; then
 		echo -e "${RED}ImageMagick is not installed. Please install it to use this script.${COLORRESET}"
 		exit 1
 fi
 
-# Fonction pour afficher un menu interactif
 show_menu() {
 		echo -e "${CYAN}Please choose an option:${COLORRESET}"
 		echo "1) Generate Favicons"
@@ -27,7 +24,6 @@ show_menu() {
 		echo "5) Exit"
 }
 
-# Fonction pour générer les favicons
 generate_favicons() {
 		local sizes=("16x16" "32x32" "64x64" "96x96" "128x128" "256x256")
 		local icons=()
@@ -45,7 +41,6 @@ generate_favicons() {
 		echo -e "${GREEN}Generated favicon.ico${COLORRESET}"
 }
 
-# Fonction pour générer les icônes Apple Touch
 generate_apple_icons() {
 		local sizes=("152x152" "167x167" "180x180")
 		local icons=()
@@ -59,13 +54,11 @@ generate_apple_icons() {
 		done
 }
 
-# Fonction pour générer les deux types d'icônes
 generate_both() {
 		generate_favicons
 		generate_apple_icons
 }
 
-# Fonction pour créer les tags HTML
 create_html_tags() {
 		local sizes=("16x16" "32x32" "64x64" "96x96" "128x128" "256x256")
 		local apple_sizes=("152x152" "167x167" "180x180")
@@ -84,7 +77,6 @@ create_html_tags() {
 		echo -e "${GREEN}HTML tags created in favicons.txt${COLORRESET}"
 }
 
-# Fonction pour créer le manifest.json
 create_manifest() {
 		local icons=()
 		local sizes=("72x72" "96x96" "128x128" "144x144" "152x152" "192x192" "384x384" "512x512")
@@ -113,7 +105,6 @@ create_manifest() {
 				echo -e "${GREEN}Generated $output${COLORRESET}"
 		done
 
-		# Remove the last comma and close the JSON array and object
 		sed -i '$ s/,$//' manifest.json
 		echo "  ]" >> manifest.json
 		echo "}" >> manifest.json
@@ -121,18 +112,15 @@ create_manifest() {
 		echo -e "${GREEN}manifest.json created${COLORRESET}"
 }
 
-# Fonction pour créer un fichier ZIP contenant tous les fichiers générés
 create_zip() {
 		echo -e "${CYAN}Creating ZIP file of all generated files...${COLORRESET}"
 		zip -r generated_icons.zip ./*-*.png favicon.ico manifest.json favicons.txt
 		echo -e "${GREEN}ZIP file created: generated_icons.zip${COLORRESET}"
 }
 
-# Demander à l'utilisateur l'image source
 echo -ne "${CYAN}Please enter the source image path: ${COLORRESET}"
 read SRC_IMAGE
 
-# Vérifier si l'image source est fournie et existe
 if [ -z "$SRC_IMAGE" ]; then
 		echo -e "${RED}You must supply a source image.${COLORRESET}"
 		exit 1
@@ -141,17 +129,14 @@ elif [ ! -f "$SRC_IMAGE" ]; then
 		exit 1
 fi
 
-# Demander à l'utilisateur le nom de l'application
 echo -ne "${CYAN}Please enter the application name: ${COLORRESET}"
 read APP_NAME
 
-# Générer l'image de base
 NAME="${SRC_IMAGE/\.*/-512x512.png}"
 echo -e "${CYAN}Generating square base image...${COLORRESET}"
 convert "$SRC_IMAGE" -resize 512x512! -transparent white "$NAME"
 echo -e "${GREEN}Generated base image $NAME${COLORRESET}"
 
-# Afficher le menu et lire l'option de l'utilisateur
 while true; do
 		show_menu
 		echo -ne "${YELLOW}Enter your choice: ${COLORRESET}"
@@ -178,21 +163,18 @@ while true; do
 						;;
 		esac
 
-		# Demander à l'utilisateur s'il souhaite créer les tags HTML
 		echo -ne "${YELLOW}Do you want to create HTML tags? (y/n): ${COLORRESET}"
 		read create_tags
 		if [[ $create_tags == "y" || $create_tags == "Y" ]]; then
 				create_html_tags
 		fi
 
-		# Demander à l'utilisateur s'il souhaite créer le manifest.json
 		echo -ne "${YELLOW}Do you want to create manifest.json? (y/n): ${COLORRESET}"
 		read create_manifest_json
 		if [[ $create_manifest_json == "y" || $create_manifest_json == "Y" ]]; then
 				create_manifest
 		fi
 
-		# Demander à l'utilisateur s'il souhaite créer un ZIP
 		echo -ne "${YELLOW}Do you want to create a ZIP of all generated files? (y/n): ${COLORRESET}"
 		read create_zip_files
 		if [[ $create_zip_files == "y" || $create_zip_files == "Y" ]]; then
