@@ -14,6 +14,23 @@ Welcome to **Favgen by TRHACKNON** – a fun and dynamic favicon generator scrip
 ## Requirements
 - **ImageMagick**: Ensure you have ImageMagick installed to use this script.
 
+## Installation
+### ImageMagick
+Make sure you have ImageMagick installed:
+```bash
+sudo apt-get install imagemagick
+```
+
+### Cloning the Repository
+Clone this repository and navigate to the directory:
+```bash
+git clone https://github.com/rainbowhatrkn/favgen.git
+cd favgen
+chmod +x favgen.sh
+```
+
+[![Clone Repository](https://img.shields.io/badge/GitHub-Clone%20Repository-blue?logo=github)](https://github.com/rainbowhatrkn/favgen)
+
 ## Usage
 ### Running the Script
 ```bash
@@ -116,21 +133,6 @@ Follow the on-screen prompts to provide the source image and application name, a
 - **🗂️ All-in-One ZIP**: Package everything into a convenient ZIP file.
 
 ![Cow Say](https://via.placeholder.com/400x200.png?text=Welcome+to+the+Favicon+Generator)
-
-## Installation
-### ImageMagick
-Make sure you have ImageMagick installed:
-```bash
-sudo apt-get install imagemagick
-```
-
-### Script
-Clone this repository and navigate to the directory:
-```bash
-git clone https://github.com/tucommenceapousser/favgen.git
-cd favgen
-chmod +x main.sh
-```
 
 ## Contributing
 Feel free to fork this repository, make improvements, and create pull requests. Your contributions are welcome!
